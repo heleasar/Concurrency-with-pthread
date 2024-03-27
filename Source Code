@@ -1,0 +1,25 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <pthread.h>
+
+void* print_i(void *ptr) {
+    printf("I am in i\n");
+    return NULL;
+}
+
+void* print_j(void *ptr) {
+    printf("I am in j\n");
+    return NULL;
+}
+
+int main() {
+    pthread_t t1, t2;
+    int rc1 = pthread_create(&t1, NULL, print_i, NULL);
+    int rc2 = pthread_create(&t2, NULL, print_j, NULL);
+    
+    // Wait for threads to finish
+    pthread_join(t1, NULL);
+    pthread_join(t2, NULL);
+    
+    return 0;
+}
